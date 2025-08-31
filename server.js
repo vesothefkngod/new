@@ -20,9 +20,9 @@ app.use(express.static('public')); // сервира frontend
 // ==========================
 // Продукти (примерни)
 const products = [
-    { id: 1, name: 'T-Shirt', price: 2000, currency: 'USD' },
-    { id: 2, name: 'Hoodie', price: 4000, currency: 'USD' },
-    { id: 3, name: 'Sticker Pack', price: 500, currency: 'USD' }
+    { id: 1, name: 'T-Shirt', price: 100, currency: 'USD' },
+    { id: 2, name: 'Hoodie', price: 1, currency: 'USD' },
+    { id: 3, name: 'Sticker Pack', price: 5, currency: 'USD' }
 ];
 
 // ==========================
