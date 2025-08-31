@@ -3,11 +3,13 @@ import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import session from 'express-session';
 import fetch from 'node-fetch';
+import cors from 'cors';
 
 dotenv.config();
 const app = express();
 
 // Middleware
+app.use(cors()); // ако frontend и backend са на различни домейни
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
@@ -18,10 +20,10 @@ app.use(session({
 app.use(express.static('public')); // сервира frontend
 
 // ==========================
-// Продукти (примерни)
+// Продукти
 const products = [
-    { id: 1, name: 'T-Shirt', price: 100, currency: 'USD' },
-    { id: 2, name: 'Hoodie', price: 1, currency: 'USD' },
+    { id: 1, name: 'T-Shirt', price: 2, currency: 'USD' },
+    { id: 2, name: 'Hoodie', price: 4, currency: 'USD' },
     { id: 3, name: 'Sticker Pack', price: 5, currency: 'USD' }
 ];
 
