@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors()); // ако frontend и backend са на различни домейни
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
@@ -17,30 +17,23 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
-app.use(express.static('public')); // сервира frontend
+app.use(express.static('public'));
 
 // ==========================
 // Продукти
 const products = [
-    { id: 1, name: 'T-Shirt', price: 2, currency: 'USD' },
-    { id: 2, name: 'Hoodie', price: 4, currency: 'USD' },
-    { id: 3, name: 'Sticker Pack', price: 5, currency: 'USD' }
+    { id: 1, name: 'T-Shirt', price: 2000, currency: 'USD' },
+    { id: 2, name: 'Hoodie', price: 4000, currency: 'USD' },
+    { id: 3, name: 'Sticker Pack', price: 500, currency: 'USD' }
 ];
 
-// ==========================
 // Route за продукти
-app.get('/products', (req, res) => {
-    res.json(products);
-});
+app.get('/products', (req, res) => res.json(products));
 
-// ==========================
 // Checkout route
 app.post('/checkout', async (req, res) => {
     const { amount, currency } = req.body;
-
-    if (!amount || !currency) {
-        return res.status(400).json({ error: 'Amount and currency required' });
-    }
+    if (!amount || !currency) return res.status(400).json({ error: 'Amount and currency required' });
 
     try {
         const response = await fetch('https://api.oxapay.com/v1/checkout', {
@@ -50,8 +43,8 @@ app.post('/checkout', async (req, res) => {
                 'Authorization': `Bearer ${process.env.OXAPAY_API_KEY}`
             },
             body: JSON.stringify({
-                amount: amount,
-                currency: currency,
+                amount,
+                currency,
                 description: 'VNDPrime Store Test Payment'
             })
         });
@@ -65,8 +58,6 @@ app.post('/checkout', async (req, res) => {
     }
 });
 
-// ==========================
 // Старт на сървъра
-// ==========================
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
