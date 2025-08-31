@@ -1,0 +1,13 @@
+<%- include('../partials/header') %>
+<h2>Плащане</h2>
+<div class="card">
+  <div class="card-body">
+    <p>Сума: €<%= amount.toFixed(2) %></p>
+    <% if (invoiceUrl) { %>
+      <a href="<%= invoiceUrl %>" class="btn" target="_blank">Отвори фактура</a>
+    <% } else { %>
+      <p class="muted">Създаваме фактура...</p>
+    <% } %>
+  </div>
+</div>
+<%- include('../partials/footer') %>

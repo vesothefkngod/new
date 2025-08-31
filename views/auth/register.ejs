@@ -1,0 +1,15 @@
+<%- include('../partials/header') %>
+<h2>Регистрация</h2>
+<% if (flash) { %><div class="card"><div class="card-body"><p class="<%= flash.type %>"><%= flash.text %></p></div></div><% } %>
+<form method="POST" action="/auth/register" class="form">
+  <label>Потребителско име</label>
+  <input type="text" name="username" required />
+  <label>Парола</label>
+  <input type="password" name="password" required minlength="6" />
+  <label>Повтори парола</label>
+  <input type="password" name="password2" required minlength="6" />
+  <label>Captcha: <strong><%= captchaQuestion %></strong></label>
+  <input type="text" name="captcha" required />
+  <button class="btn" type="submit">Създай акаунт</button>
+</form>
+<%- include('../partials/footer') %>

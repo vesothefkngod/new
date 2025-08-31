@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/darkstore
+      - SESSION_SECRET=change_this_secret
+      - OXAPAY_API_KEY=${OXAPAY_API_KEY}
+      - OXAPAY_BASE_URL=${OXAPAY_BASE_URL}
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: darkstore
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+volumes:
+  db_data:

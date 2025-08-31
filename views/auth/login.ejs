@@ -1,0 +1,13 @@
+<%- include('../partials/header') %>
+<h2>Вход</h2>
+<% if (flash) { %><div class="card"><div class="card-body"><p class="<%= flash.type %>"><%= flash.text %></p></div></div><% } %>
+<form method="POST" action="/auth/login" class="form">
+  <label>Потребителско име</label>
+  <input type="text" name="username" required />
+  <label>Парола</label>
+  <input type="password" name="password" required />
+  <label>Captcha: <strong><%= captchaQuestion %></strong></label>
+  <input type="text" name="captcha" required />
+  <button class="btn" type="submit">Влез</button>
+</form>
+<%- include('../partials/footer') %>

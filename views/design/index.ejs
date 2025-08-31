@@ -1,0 +1,32 @@
+<%- include('../partials/header') %>
+<section class="hero">
+  <h1><span>Dark</span> Crypto Store</h1>
+  <p class="lead">Premium продукти. Плащаш в крипто. Никакви имейли. Само поръчка и доставка.</p>
+  <div class="cta">
+    <a class="btn" href="/products">Разгледай продукти</a>
+    <% if (!user) { %>
+      <a class="btn outline" href="/auth/register">Създай профил</a>
+    <% } %>
+  </div>
+</section>
+
+<section id="store" class="cards">
+  <% if (products && products.length) { %>
+    <% products.forEach(p => { %>
+      <a class="card" href="/products/<%= p.id %>">
+        <div class="card-img" style="background-image:url('<%= p.image %>')"></div>
+        <div class="card-body">
+          <h3><%= p.title %></h3>
+          <p class="muted"><%= p.short %></p>
+          <div class="price-row">
+            <span class="price">€<%= p.price.toFixed(2) %></span>
+            <span class="pill">в наличност</span>
+          </div>
+        </div>
+      </a>
+    <% }) %>
+  <% } else { %>
+    <div class="empty">Няма продукти.</div>
+  <% } %>
+</section>
+<%- include('../partials/footer') %>

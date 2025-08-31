@@ -1,0 +1,21 @@
+<%- include('../partials/header') %>
+<h2>Всички продукти</h2>
+<section class="cards">
+  <% products.forEach(p => { %>
+    <a class="card" href="/products/<%= p.id %>">
+      <div class="card-img" style="background-image:url('<%= p.image %>')"></div>
+      <div class="card-body">
+        <h3><%= p.title %></h3>
+        <p class="muted"><%= p.short %></p>
+        <div class="price-row">
+          <span class="price">€<%= p.price.toFixed(2) %></span>
+          <form method="POST" action="/pay/checkout" style="display:inline">
+            <input type="hidden" name="productId" value="<%= p.id %>"/>
+            <button class="btn sm">Купи</button>
+          </form>
+        </div>
+      </div>
+    </a>
+  <% }) %>
+</section>
+<%- include('../partials/footer') %>

@@ -1,0 +1,16 @@
+<%- include('../partials/header') %>
+<section class="product">
+  <div class="product-media" style="background-image:url('<%= product.image %>')"></div>
+  <div class="product-info">
+    <h1><%= product.title %></h1>
+    <p class="muted"><%= product.desc %></p>
+    <div class="price-row">
+      <span class="price big">€<%= product.price.toFixed(2) %></span>
+    </div>
+    <form method="POST" action="/pay/checkout">
+      <input type="hidden" name="productId" value="<%= product.id %>"/>
+      <button class="btn" type="submit">Плати в крипто (OxaPay)</button>
+    </form>
+  </div>
+</section>
+<%- include('../partials/footer') %>
